@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    Store
+</head>
+<body>
+<nav>
+    <a href="/">Products</a>
+    <a href="/cart">Cart </a>
+</nav>
+<% if(!items.length) { %>
+    <p>No products in cart </p>
+<% } else { %>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    <% for (item of items) { %>
+        <tr>
+            <td><%= item.name %></td>
+            <td><%= item.price %> zł</td>
+            <td>
+                <form action="/removeFromCart" method="POST">
+                    <input type="hidden" name="id" value="<%= item._id %>">
+                    <button type="submit">Delete from cart</button>
+                </form>
+            </td>
+        </tr>
+    <% } }%>
+</table>
+<p>Summary : <%= summary %> </p>
+<form action="/buy" method="POST">
+    <button type="submit">Buy</button>
+</form>
+</body>
+</html>
